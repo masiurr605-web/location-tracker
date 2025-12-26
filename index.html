@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Location Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #location {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Location Tracker</h2>
+<button onclick="getLocation()">Allow Location</button>
+
+<div id="location"></div>
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    document.getElementById("location").innerHTML =
+        "Latitude: " + lat + "<br>Longitude: " + lon + "<br><br><a href='https://www.google.com/maps?q=" + lat + "," + lon + "' target='_blank'>Open in Google Maps</a>";
+}
+
+function showError(error) {
+    document.getElementById("location").innerHTML = "Location permission denied ❌";
+}
+</script>
+
+</body>
+</html>
